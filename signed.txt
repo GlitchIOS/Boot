@@ -3,7 +3,7 @@
 ! Checksum: 3sy+Wo4Cuc3R44xZcXSdkA
 ! Title: BOOT
 ! Homepage: https://github.com/GlitchIOS/Boot
-! License: https://github.com/kbinani/adblock-youtube-ads/blob/master/LICENSE
+! License: https://github.com/GlitchIOS/Boot/blob/master/LICENSE
 ##.ad-container
 ##.video-ads
 ##.ytp-ad-progress-list
