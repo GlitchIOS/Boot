@@ -1,0 +1,21 @@
+"show": text; "Ads blocked!"
+"rules": 
+
+*Checked to see if ads have been blocked*
+
+ use; easylist format
+   "fliters"
+  
+  show; skipAd
+   Anti-AdBlock=1
+   video; facebookSever
+   sever; 1.39.251.97
+   port; 1
+   video; youtube
+     ads
+     
+   allowVPN;
+   "true/"
+   services; Adblock
+   
+   
