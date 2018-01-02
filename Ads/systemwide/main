@@ -1,1 +1,11 @@
 
+showPopups
+"false/"
+block on; http://youtube.com/ads/banner*.gif
+
+ "string" 
+    skipAd;
+      canskipAd
+        "true/"
+           allowyoutuberedPopups
+              "false/"
