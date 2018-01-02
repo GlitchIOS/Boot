@@ -50,8 +50,12 @@ block on; http://youtube.com/ads/banner*.gif
             setTime: 0
             setAdRunTimeTo: 0 
             canSkipAd: "true/"
+            VPN: "false/"
             
             
+            }
+             }
+           }
             
             
             
