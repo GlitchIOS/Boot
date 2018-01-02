@@ -39,10 +39,24 @@ block on; http://youtube.com/ads/banner*.gif
     
     }
     
-      
+     use; 
+         port: 1
+         
     
-    
-    
+           export; "data" 
+           
+           "string;" text: Skip
+            countdown=0
+            setTime: 0
+            setAdRunTimeTo: 0 
+            canSkipAd: "true/"
+            
+            
+            
+            
+            
+                
+     
     
     
     
