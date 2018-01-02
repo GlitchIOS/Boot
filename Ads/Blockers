@@ -9,3 +9,9 @@
 0.0.0.0 securepubads.g.doubleclick.net
 # 0.0.0.0 spclient.wg.spotify.com # GH-270 
 0.0.0.0 www.googletagservices.com
+
+#ads #block
+
+1.2.3 www.youtube.com
+
+
