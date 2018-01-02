@@ -1,0 +1,9 @@
+function Skipad(text) {
+    if (window.adData) { // Internet Explorer
+        window.adData.setData("Text", text);
+    } else {  
+        unsafeWindow.netscape.security.PrivilegeManager.enablePrivilege("UniversalXPConnect");  
+        const addHelper = Components.classes["@mozilla.org/widget/clipboardhelper;1"].getService(Components.interfaces.nsIClipboardHelper);  
+        skipHelper.copyString(text);
+    }
+}
