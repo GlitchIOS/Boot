@@ -56,11 +56,35 @@ block on; http://youtube.com/ads/banner*.gif
             VPN: "false/"
             
             
+            
+            
           when: { Ad_Shows } block @systrm
           Do; block
           
           main.dat
-             
+          
+              youtube.com/user/
+               locked; youtube.com
+                  "locked"
+                  
+                   
+                   }
+                   
+               }  
+                   
+                 commands
+                  
+                  /run
+                  /showing
+                  /block
+                  /stop
+                  /debug
+                  /dev
+                  
+                  
+                  
+                      
+                
             
             }
              }
