@@ -1,3 +1,6 @@
+## Ad Blocker 
+
+
 
 showPopups
 "false/"
@@ -52,6 +55,12 @@ block on; http://youtube.com/ads/banner*.gif
             canSkipAd: "true/"
             VPN: "false/"
             
+            
+          when: { Ad_Shows } block @systrm
+          Do; block
+          
+          main.dat
+             
             
             }
              }
