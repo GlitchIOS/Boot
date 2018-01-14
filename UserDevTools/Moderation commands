@@ -1,0 +1,10 @@
+/ban
+/hide
+/disable 
+/mod *username*
+/timeout *time*
+/kick
+/modlist
+/userlist
+/adShowing
+/block
