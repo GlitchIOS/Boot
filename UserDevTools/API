@@ -1,0 +1,12 @@
+• For developers only! 
+• To run execute "/patcher" this will run the dev tools.
+• Restart once done.
+• Then use boot to load it. 
+• Done? You should see a list of tools. EX: ShowAdNumbers etc...
+• You can exit it if you type "/exitdevscreen"
+• Also, Allow root (only if jailbroken)
+
+----
+
+- The last step was Line 7, that step is only for jailbroken users! So, do this if you don't have ssh/root...
+• Open Settings app | Tap wifi and reconnect. Then, reboot. Make sure ypu don't have a VPN! THEN YOUR DONE!!!
