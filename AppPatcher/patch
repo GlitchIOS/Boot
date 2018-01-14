@@ -1,0 +1,632 @@
+
+.class public Lorg/pornaway/service/BootService;
+.super Landroid/app/IntentService;
+.source "BootService.java"
+
+
+# direct methods
+.method public constructor <init>()V
+    .registers 2
+
+    .prologue
+    .line 33
+    const-string v0, "PornAwayBootService"
+
+    invoke-direct {p0, v0}, Landroid/app/IntentService;-><init>(Ljava/lang/String;)V
+
+    .line 34
+    return-void
+.end method
+
+
+# virtual methods
+.method protected onHandleIntent(Landroid/content/Intent;)V
+    .registers 4
+    .param p1, "intent"    # Landroid/content/Intent;
+
+    .prologue
+    .line 39
+    const-string v0, "PornAway"
+
+    const-string v1, "BootService: onHandleIntent"
+
+    invoke-static {v0, v1}, Lorg/pornaway/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)V
+
+    .line 40
+    invoke-virtual {p0}, Lorg/pornaway/service/BootService;->getApplicationContext()Landroid/content/Context;
+
+    move-result-object v0
+
+    invoke-static {v0}, Lorg/pornaway/util/WebserverUtils;->startWebserverOnBoot(Landroid/content/Context;)V
+
+    .line 41
+    return-void
+.end method
+
+.method 1
+.class public Lorg/pornaway/service/UpdateService;
+.super Lcom/commonsware/cwac/wakeful/WakefulIntentService;
+.source "UpdateService.java"
+
+
+# static fields
+.field public static final EXTRA_BACKGROUND_EXECUTION:Ljava/lang/String; = "org.pornaway.BACKGROUND_EXECUTION"
+
+.field private static final UPDATE_NOTIFICATION_ID:I = 0xa
+
+
+# instance fields
+.field private mApplyAfterCheck:Z
+
+.field private mBackgroundExecution:Z
+
+.field private mNotificationManager:Landroid/app/NotificationManager;
+
+.field private mNumberOfDownloads:I
+
+.field private mNumberOfFailedDownloads:I
+
+.field private mService:Landroid/content/Context;
+
+
+# direct methods
+.method public constructor <init>()V
+    .registers 2
+
+    .prologue
+    .line 69
+    const-string v0, "PornAwayUpdateService"
+
+    invoke-direct {p0, v0}, Lcom/commonsware/cwac/wakeful/WakefulIntentService;-><init>(Ljava/lang/String;)V
+
+    .line 70
+    return-void
+.end method
+
+.method private cancelUpdateNotification()V
+    .registers 3
+
+    .prologue
+    .line 282
+    iget-object v0, p0, Lorg/pornaway/service/UpdateService;->mNotificationManager:Landroid/app/NotificationManager;
+
+    const/16 v1, 0xa
+
+    invoke-virtual {v0, v1}, Landroid/app/NotificationManager;->cancel(I)V
+
+    .line 283
+    return-void
+.end method
+
+.method private checkForUpdates()I
+    .registers 19
+
+    .prologue
+    .line 137
+    const/4 v12, 0x0
+
+    .line 139
+    .local v12, "updateAvailable":Z
+    const/4 v11, 0x4
+
+    .line 141
+    .local v11, "returnCode":I
+    move-object/from16 v0, p0
+
+    iget-object v13, v0, Lorg/pornaway/service/UpdateService;->mService:Landroid/content/Context;
+
+    invoke-static {v13}, Lorg/pornaway/util/Utils;->isAndroidOnline(Landroid/content/Context;)Z
+
+    move-result v13
+
+    if-eqz v13, :cond_157
+
+    .line 143
+    const/4 v13, 0x0
+
+    move-object/from16 v0, p0
+
+    iput v13, v0, Lorg/pornaway/service/UpdateService;->mNumberOfFailedDownloads:I
+
+    .line 144
+    const/4 v13, 0x0
+
+    move-object/from16 v0, p0
+
+    iput v13, v0, Lorg/pornaway/service/UpdateService;->mNumberOfDownloads:I
+
+    .line 147
+    move-object/from16 v0, p0
+
+    iget-object v13, v0, Lorg/pornaway/service/UpdateService;->mService:Landroid/content/Context;
+
+    invoke-static {v13}, Lorg/pornaway/provider/ProviderHelper;->getEnabledHostsSourcesCursor(Landroid/content/Context;)Landroid/database/Cursor;
+
+    move-result-object v9
+
+    .line 150
+    .local v9, "enabledHostsSourcesCursor":Landroid/database/Cursor;
+    if-eqz v9, :cond_f6
+
+    invoke-interface {v9}, Landroid/database/Cursor;->moveToFirst()Z
+
+    move-result v13
+
+    if-eqz v13, :cond_f6
+
+    .line 153
+    :cond_26
+    move-object/from16 v0, p0
+
+    iget v13, v0, Lorg/pornaway/service/UpdateService;->mNumberOfDownloads:I
+
+    add-int/lit8 v13, v13, 0x1
+
+    move-object/from16 v0, p0
+
+    iput v13, v0, Lorg/pornaway/service/UpdateService;->mNumberOfDownloads:I
+
+    .line 156
+    const-string v13, "url"
+
+    .line 157
+    invoke-interface {v9, v13}, Landroid/database/Cursor;->getColumnIndex(Ljava/lang/String;)I
+
+    move-result v13
+
+    invoke-interface {v9, v13}, Landroid/database/Cursor;->getString(I)Ljava/lang/String;
+
+    move-result-object v3
+
+    .line 158
+    .local v3, "currentUrl":Ljava/lang/String;
+    const-string v13, "last_modified_local"
+
+    .line 160
+    invoke-interface {v9, v13}, Landroid/database/Cursor;->getColumnIndex(Ljava/lang/String;)I
+
+    move-result v13
+
+    .line 159
+    invoke-interface {v9, v13}, Landroid/database/Cursor;->getLong(I)J
+
+    move-result-wide v4
+
+    .line 163
+    .local v4, "currentLastModifiedLocal":J
+    :try_start_44
+    const-string v13, "PornAway"
+
+    new-instance v14, Ljava/lang/StringBuilder;
+
+    invoke-direct {v14}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v15, "Checking hosts file: "
+
+    invoke-virtual {v14, v15}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v14
+
+    invoke-virtual {v14, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v14
+
+    invoke-virtual {v14}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v14
+
+    invoke-static {v13, v14}, Lorg/pornaway/util/Log;->v(Ljava/lang/String;Ljava/lang/String;)V
+
+    .line 166
+    new-instance v10, Ljava/net/URL;
+
+    invoke-direct {v10, v3}, Ljava/net/URL;-><init>(Ljava/lang/String;)V
+
+    .line 167
+    .local v10, "mURL":Ljava/net/URL;
+    invoke-virtual {v10}, Ljava/net/URL;->openConnection()Ljava/net/URLConnection;
+
+    move-result-object v2
+
+    .line 168
+    .local v2, "connection":Ljava/net/URLConnection;
+    const/16 v13, 0x3a98
+
+    invoke-virtual {v2, v13}, Ljava/net/URLConnection;->setConnectTimeout(I)V
+
+    .line 169
+    const/16 v13, 0x7530
+
+    invoke-virtual {v2, v13}, Ljava/net/URLConnection;->setReadTimeout(I)V
+
+    .line 171
+    invoke-virtual {v2}, Ljava/net/URLConnection;->getLastModified()J
+
+    move-result-wide v6
+
+    .line 173
+    .local v6, "currentLastModifiedOnline":J
+    const-string v13, "PornAway"
+
+    new-instance v14, Ljava/lang/StringBuilder;
+
+    invoke-direct {v14}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v15, "mConnectionLastModified: "
+
+    invoke-virtual {v14, v15}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v14
+
+    invoke-virtual {v14, v6, v7}, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;
+
+    move-result-object v14
+
+    const-string v15, " ("
+
+    invoke-virtual {v14, v15}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v14
+
+    move-object/from16 v0, p0
+
+    iget-object v15, v0, Lorg/pornaway/service/UpdateService;->mService:Landroid/content/Context;
+
+    .line 177
+    invoke-static {v15, v6, v7}, Lorg/pornaway/util/DateUtils;->longToDateString(Landroid/content/Context;J)Ljava/lang/String;
+
+    move-result-object v15
+
+    invoke-virtual {v14, v15}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v14
+
+    const-string v15, ")"
+
+    invoke-virtual {v14, v15}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v14
+
+    invoke-virtual {v14}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v14
+
+    .line 173
+    invoke-static {v13, v14}, Lorg/pornaway/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)V
+
+    .line 181
+    const-string v13, "PornAway"
+
+    new-instance v14, Ljava/lang/StringBuilder;
+
+    invoke-direct {v14}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v15, "mCurrentLastModified: "
+
+    invoke-virtual {v14, v15}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v14
+
+    invoke-virtual {v14, v4, v5}, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;
+
+    move-result-object v14
+
+    const-string v15, " ("
+
+    invoke-virtual {v14, v15}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v14
+
+    move-object/from16 v0, p0
+
+    iget-object v15, v0, Lorg/pornaway/service/UpdateService;->mService:Landroid/content/Context;
+
+    .line 185
+    invoke-static {v15, v4, v5}, Lorg/pornaway/util/DateUtils;->longToDateString(Landroid/content/Context;J)Ljava/lang/String;
+
+    move-result-object v15
+
+    invoke-virtual {v14, v15}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v14
+
+    const-string v15, ")"
+
+    invoke-virtual {v14, v15}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v14
+
+    invoke-virtual {v14}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v14
+
+    .line 181
+    invoke-static {v13, v14}, Lorg/pornaway/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)V
+
+    .line 190
+    invoke-virtual {v2}, Ljava/net/URLConnection;->connect()V
+
+    .line 191
+    invoke-virtual {v2}, Ljava/net/URLConnection;->getInputStream()Ljava/io/InputStream;
+
+    .line 194
+    cmp-long v13, v6, v4
+
+    if-lez v13, :cond_de
+
+    .line 195
+    const/4 v12, 0x1
+
+    .line 199
+    :cond_de
+    move-object/from16 v0, p0
+
+    iget-object v13, v0, Lorg/pornaway/service/UpdateService;->mService:Landroid/content/Context;
+
+    const-string v14, "_id"
+
+    .line 201
+    invoke-interface {v9, v14}, Landroid/database/Cursor;->getColumnIndex(Ljava/lang/String;)I
+
+    move-result v14
+
+    .line 200
+    invoke-interface {v9, v14}, Landroid/database/Cursor;->getInt(I)I
+
+    move-result v14
+
+    int-to-long v14, v14
+
+    .line 199
+    invoke-static {v13, v14, v15, v6, v7}, Lorg/pornaway/provider/ProviderHelper;->updateHostsSourceLastModifiedOnline(Landroid/content/Context;JJ)V
+    :try_end_f0
+    .catch Ljava/lang/Exception; {:try_start_44 .. :try_end_f0} :catch_11f
+
+    .line 217
+    .end local v2    # "connection":Ljava/net/URLConnection;
+    .end local v6    # "currentLastModifiedOnline":J
+    .end local v10    # "mURL":Ljava/net/URL;
+    :goto_f0
+    invoke-interface {v9}, Landroid/database/Cursor;->moveToNext()Z
+
+    move-result v13
+
+    if-nez v13, :cond_26
+
+    .line 221
+    .end local v3    # "currentUrl":Ljava/lang/String;
+    .end local v4    # "currentLastModifiedLocal":J
+    :cond_f6
+    if-eqz v9, :cond_101
+
+    invoke-interface {v9}, Landroid/database/Cursor;->isClosed()Z
+
+    move-result v13
+
+    if-nez v13, :cond_101
+
+    .line 222
+    invoke-interface {v9}, Landroid/database/Cursor;->close()V
+
+    .line 226
+    :cond_101
+    move-object/from16 v0, p0
+
+    iget v13, v0, Lorg/pornaway/service/UpdateService;->mNumberOfDownloads:I
+
+    move-object/from16 v0, p0
+
+    iget v14, v0, Lorg/pornaway/service/UpdateService;->mNumberOfFailedDownloads:I
+
+    if-ne v13, v14, :cond_112
+
+    move-object/from16 v0, p0
+
+    iget v13, v0, Lorg/pornaway/service/UpdateService;->mNumberOfDownloads:I
+
+    if-eqz v13, :cond_112
+
+    .line 227
+    const/4 v11, 0x6
+
+    .line 240
+    .end local v9    # "enabledHostsSourcesCursor":Landroid/database/Cursor;
+    :cond_112
+    :goto_112
+    if-eqz v12, :cond_115
+
+    .line 241
+    const/4 v11, 0x3
+
+    .line 245
+    :cond_115
+    sget-object v13, Lorg/pornaway/util/Constants;->ANDROID_SYSTEM_ETC_HOSTS:Ljava/lang/String;
+
+    invoke-static {v13}, Lorg/pornaway/util/ApplyUtils;->isHostsFileCorrect(Ljava/lang/String;)Z
+
+    move-result v13
+
+    if-nez v13, :cond_11e
+
+    .line 246
+    const/4 v11, 0x5
+
+    .line 249
+    :cond_11e
+    return v11
+
+    .line 205
+    .restart local v3    # "currentUrl":Ljava/lang/String;
+    .restart local v4    # "currentLastModifiedLocal":J
+    .restart local v9    # "enabledHostsSourcesCursor":Landroid/database/Cursor;
+    :catch_11f
+    move-exception v8
+
+    .line 206
+    .local v8, "e":Ljava/lang/Exception;
+    const-string v13, "PornAway"
+
+    new-instance v14, Ljava/lang/StringBuilder;
+
+    invoke-direct {v14}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v15, "Exception while downloading from "
+
+    invoke-virtual {v14, v15}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v14
+
+    invoke-virtual {v14, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v14
+
+    invoke-virtual {v14}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v14
+
+    invoke-static {v13, v14, v8}, Lorg/pornaway/util/Log;->e(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)V
+
+    .line 208
+    move-object/from16 v0, p0
+
+    iget v13, v0, Lorg/pornaway/service/UpdateService;->mNumberOfFailedDownloads:I
+
+    add-int/lit8 v13, v13, 0x1
+
+    move-object/from16 v0, p0
+
+    iput v13, v0, Lorg/pornaway/service/UpdateService;->mNumberOfFailedDownloads:I
+
+    .line 211
+    move-object/from16 v0, p0
+
+    iget-object v13, v0, Lorg/pornaway/service/UpdateService;->mService:Landroid/content/Context;
+
+    const-string v14, "_id"
+
+    .line 213
+    invoke-interface {v9, v14}, Landroid/database/Cursor;->getColumnIndex(Ljava/lang/String;)I
+
+    move-result v14
+
+    .line 212
+    invoke-interface {v9, v14}, Landroid/database/Cursor;->getInt(I)I
+
+    move-result v14
+
+    int-to-long v14, v14
+
+    const-wide/16 v16, 0x0
+
+    .line 211
+    invoke-static/range {v13 .. v17}, Lorg/pornaway/provider/ProviderHelper;->updateHostsSourceLastModifiedOnline(Landroid/content/Context;JJ)V
+
+    goto :goto_f0
+
+    .line 231
+    .end local v3    # "currentUrl":Ljava/lang/String;
+    .end local v4    # "currentLastModifiedLocal":J
+    .end local v8    # "e":Ljava/lang/Exception;
+    .end local v9    # "enabledHostsSourcesCursor":Landroid/database/Cursor;
+    :cond_157
+    move-object/from16 v0, p0
+
+    iget-boolean v13, v0, Lorg/pornaway/service/UpdateService;->mBackgroundExecution:Z
+
+    if-nez v13, :cond_15f
+
+    .line 232
+    const/4 v11, 0x7
+
+    goto :goto_112
+
+    .line 234
+    :cond_15f
+    const-string v13, "PornAway"
+
+    const-string v14, "Should not happen! In background execution is no connection available!"
+
+    invoke-static {v13, v14}, Lorg/pornaway/util/Log;->e(Ljava/lang/String;Ljava/lang/String;)V
+
+    goto :goto_112
+.end method
+
+.method private showUpdateNotification()V
+    .registers 16
+
+    .prologue
+    const v14, 0x7f08008b
+
+    const/high16 v13, 0x7f080000
+
+    const/4 v12, 0x0
+
+    .line 256
+    const v4, 0x7f020085
+    
+    .class public Lorg/pornaway/service/ApplyService;
+.super Lcom/commonsware/cwac/wakeful/WakefulIntentService;
+.source "ApplyService.java"
+
+
+# static fields
+.field private static final APPLY_NOTIFICATION_ID:I = 0x14
+
+
+# instance fields
+.field private mNotificationManager:Landroid/app/NotificationManager;
+
+.field private mNumberOfDownloads:I
+
+.field private mNumberOfFailedDownloads:I
+
+.field private mService:Landroid/content/Context;
+
+
+# direct methods
+.method public constructor <init>()V
+    .registers 2
+
+    .prologue
+    .line 75
+    const-string v0, "PornAwayApplyService"
+
+    invoke-direct {p0, v0}, Lcom/commonsware/cwac/wakeful/WakefulIntentService;-><init>(Ljava/lang/String;)V
+
+    .line 76
+    return-void
+.end method
+
+.method private cancelApplyNotification()V
+    .registers 3
+
+    .prologue
+    .line 582
+    iget-object v0, p0, Lorg/pornaway/service/ApplyService;->mNotificationManager:Landroid/app/NotificationManager;
+
+    const/16 v1, 0x14
+
+    invoke-virtual {v0, v1}, Landroid/app/NotificationManager;->cancel(I)V
+
+    .line 583
+    return-void
+.end method
+
+.method private download()I
+    .registers 27
+
+    .prologue
+    .line 139
+    const/16 v19, 0x1
+
+    .line 141
+    .local v19, "returnCode":I
+    move-object/from16 v0, p0
+
+    iget-object v0, v0, Lorg/pornaway/service/ApplyService;->mService:Landroid/content/Context;
+
+    move-object/from16 v20, v0
+
+    invoke-static/range {v20 .. v20}, Lorg/pornaway/util/Utils;->isAndroidOnline(Landroid/content/Context;)Z
+  
+
