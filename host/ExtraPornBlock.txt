@@ -8,6 +8,42 @@
     #You do not have authorization to access page 
     #Error
     
+    
+    .class public Lorg/pornaway/provider/PornAwayContract$Blacklist;
+.super Ljava/lang/Object;
+.source "PornAwayContract.java"
+
+# interfaces
+.implements Lorg/pornaway/provider/PornAwayContract$BlacklistColumns;
+.implements Landroid/provider/BaseColumns;
+
+
+# annotations
+.annotation system Ldalvik/annotation/EnclosingClass;
+    value = Lorg/pornaway/provider/PornAwayContract;
+.end annotation
+
+.annotation system Ldalvik/annotation/InnerClass;
+    accessFlags = 0x9
+    name = "Blacklist"
+.end annotation
+
+
+# static fields
+.field public static final CONTENT_ITEM_TYPE:Ljava/lang/String; = "vnd.android.cursor.item/vnd.pornaway.blacklist"
+
+.field public static final CONTENT_TYPE:Ljava/lang/String; = "vnd.android.cursor.dir/vnd.pornaway.blacklist"
+
+.field public static final CONTENT_URI:Landroid/net/Uri;
+
+.field public static final DEFAULT_SORT:Ljava/lang/String; = "url ASC"
+
+
+# direct methods
+.method static constructor <clinit>()V
+    .registers 2
+
+    
        }
       }
      }
