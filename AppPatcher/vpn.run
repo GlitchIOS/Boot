@@ -1,0 +1,11 @@
+.vpn_app_allow
+
+! Name:VPN
+! Allow: Yes
+! WifiOnly: No
+
+   }
+   
+  #run
+  #blocking...
+
