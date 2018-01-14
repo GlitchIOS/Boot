@@ -15,6 +15,7 @@
 %include https://github.com/GlitchIOS/Boot/tree/master/Ads
 %include https://github.com/GlitchIOS/Boot/tree/master/host
 %include easylist:easylist/easylist_general_block_popup.txt%
+%https://github.com/GlitchIOS/Boot/blob/master/PornBlock
 !------------------------General element hiding rules-------------------------!
 %include easylist:easylist/easylist_general_hide.txt%
 %include easylist:easylist/easylist_whitelist_general_hide.txt%
