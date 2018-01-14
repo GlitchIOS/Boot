@@ -1,7 +1,7 @@
 [Adblock Plus 2.0]
 ! Title: GlitchIOS
 ! Last modified: %timestamp%
-! Expires: 4 days (update frequency)
+! Expires: Never
 ! Homepage: https://github.com/GlitchIOS/Boot
 ! Licence: https://github.com/GlitchIOS/Boot/blob/master/LICENSE
 !
