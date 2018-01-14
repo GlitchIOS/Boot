@@ -1,0 +1,16 @@
+.blockALLPORN_
+
+    }
+    
+    #blocked
+    #block
+    #error loading...
+    #You do not have authorization to access page 
+    #Error
+    
+       }
+      }
+     }
+       }
+    
+  
