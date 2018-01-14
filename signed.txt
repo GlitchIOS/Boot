@@ -1,9 +1,9 @@
 [Adblock Plus 2.0]
-! Title: EasyList
+! Title: GlitchIOS
 ! Last modified: %timestamp%
 ! Expires: 4 days (update frequency)
 ! Homepage: https://github.com/GlitchIOS/Boot
-! Licence: https://easylist.to/pages/licence.html
+! Licence: https://github.com/GlitchIOS/Boot/blob/master/LICENSE
 !
 ! Please report any unblocked adverts or problems
 ! in the forums (https://forums.lanik.us/)
