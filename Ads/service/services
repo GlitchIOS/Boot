@@ -12,7 +12,17 @@
   <key>advertisingOff</key>
   <true/>
   
+- (void)ads:(id)sender {
+    UIAds *gpBoard = [UIAds generalAds];
+    
+    
+  [Show; Skip.button 
+   [When.tab] SkipAd
+   
+   - (void) vpn:(id) sender {
+       
+  
+  
   
  
  
-
