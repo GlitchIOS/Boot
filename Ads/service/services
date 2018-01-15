@@ -1,1 +1,18 @@
+<key>HasWifi</key>
+<true/>
+<key>AdTracking</key>
+ </array>
+ 
+  <key>AllowAds</key>
+  <false/>
+  <key>canSkipAds</key>
+  <true/>
+  <string>SkipAD</string>
+  <string>Time</string>
+  <key>advertisingOff</key>
+  <true/>
+  
+  
+ 
+ 
 
