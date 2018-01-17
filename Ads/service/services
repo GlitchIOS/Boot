@@ -20,6 +20,27 @@
    [When.tab] SkipAd
    
    - (void) vpn:(id) sender {
+       ADS = 0
+       
+        }
+       
+            <key>canHAVEADS</key>
+            <key>true/>
+            </array>
+            
+            
+          #ads #ad
+          
+            }
+           }
+             }
+                [When; skipad.tap]
+                 #block
+                 
+                 }
+           
+            
+   
        
   
   
